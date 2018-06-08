@@ -1,1 +1,23 @@
 # Provest-RS
+
+*SYSTEM REQUIREMENTS*
+
+<!-- TABLES -->
+  # AGENTS
+    - ACCOUNT_ID
+    - USER_NAME
+    - PASSWORD
+    - ACCOUNT_CREATED
+
+  # HISTORY
+    - HISTORY_ID
+    - ACCOUNT_ID
+    - DATE
+    - DESCRIPTION
+
+<!-- LOGIN REQUIREMENTS -->
+  # USER_NAME
+  # PASSWORD
+
+
+

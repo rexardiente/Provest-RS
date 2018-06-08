@@ -40,4 +40,8 @@ class HomeController @Inject()(
   def ws = WebSocket.accept[JsValue, JsValue] { implicit request =>
     ActorFlow.actorRef(out => ClientManagerActor.props(out))
   }
+
+  def login = Action.async { request =>
+    Future.successful(Ok(""))
+  }
 }
