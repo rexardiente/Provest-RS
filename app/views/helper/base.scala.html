@@ -3,7 +3,10 @@
 <html lang="@messages.lang.code">
 <head>
   <meta charset="UTF-8">
-  @pageMeta.toHtml
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="rex ardiente" content="">
+  <link rel="icon" href="../../../../favicon.ico">
   <link href="@routes.Assets.at("styles/global.css")" rel="stylesheet">
   <link href="@routes.Assets.at("styles/global.min.css")" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(wja.locate("bootstrap.min.css"))">
@@ -13,6 +16,8 @@
   <script src='@routes.WebJarAssets.at(wja.locate("riot.min.js"))'></script>
   <script src='@routes.WebJarAssets.at(wja.locate("lodash.min.js"))'></script>
   <script src="@routes.WebJarAssets.at(wja.locate("bootstrap.js"))"></script>
+  <script src="https://cdn.jsdelivr.net/riotgear/latest/rg.min.js"></script>
+  @pageMeta.toHtml
   @header
 </head>
 <body>

@@ -4,6 +4,9 @@
 
 # A home page
 GET   /                                   controllers.HomeController.index
+GET   /dashboard                          controllers.HomeController.index
+GET   /contact                            controllers.HomeController.index
+GET   /features                           controllers.HomeController.index
 
 # WebSocket Request
 GET   /ws                                 controllers.HomeController.ws

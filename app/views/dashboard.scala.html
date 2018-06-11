@@ -1,0 +1,34 @@
+@()(implicit header: RequestHeader, messages: Messages, pm: PageMeta, wja: WebJarAssets)
+@helper.base {
+  <link href="@routes.Assets.at("styles/main.css")" rel="stylesheet">
+} {
+  <!-- <div id="content"></div> -->
+  <div="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <header-nav></header-nav>
+      </header>
+
+      <h1><b>Sample Content</b></h1>
+      <main role="main" class="inner cover">
+        <div id="content"></div>
+        <!-- <h1 class="cover-heading">Cover your page.</h1>
+        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+        <p class="lead">
+          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+        </p> -->
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <footer-nav></footer-nav>
+      </footer>
+    </div>
+  </div>
+} {
+  <script src="@routes.Assets.at("comps/dashboard.js")"></script>
+  <script src="@routes.Assets.at("comps/dashboard/feature.js")"></script>
+  <script src="@routes.Assets.at("comps/dashboard/contact.js")"></script>
+  <script src="@routes.Assets.at("comps/dashboard/header-nav.js")"></script>
+  <script src="@routes.Assets.at("comps/dashboard/footer-nav.js")"></script>
+  <script src="@routes.Assets.at("scripts/app.js")"></script>
+}

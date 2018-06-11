@@ -44,6 +44,6 @@ class HomeController @Inject() (
 
   def index = Action { implicit request =>
     println("Testing")
-    Ok(views.html.page())
+    Ok(views.html.dashboard())
   }
 }
