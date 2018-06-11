@@ -1,21 +1,21 @@
-package utils.db
+package utils
 
 import javax.inject.{ Inject, Singleton }
-import play.api.Logger
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 // import models.dao._
 
 @Singleton
 class SchemaGenerator @Inject()(
-    // tradeWalletDAO: TradeWalletDAO,
+    // preferenceDAO: PreferenceDAO,
+    // realmDAO: RealmDAO,
     val dbConfigProvider: DatabaseConfigProvider)
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
-  import profile.api._
+  import driver.api._
 
   def createDDLScript() = {
     // val schemas =
-      // transactionsDAO.Query.schema ++
-      // orderBookSummaryDAO.Query.schema
+      // preferenceDAO.query.schema ++
+      // realmDAO.query.schema
 
     val writer = new java.io.PrintWriter("target/schema.sql")
     writer.write("# --- !Ups\n\n")
@@ -24,12 +24,10 @@ class SchemaGenerator @Inject()(
     writer.write("\n\n# --- !Downs\n\n")
     // schemas.dropStatements.foreach { s => writer.write(s + ";\n") }
 
-    Logger.debug("Schema definitions are written")
+    println("Schema definitions are written")
 
     writer.close()
   }
 
   createDDLScript()
 }
-
-// Note: Uncomment after providing those important data.
