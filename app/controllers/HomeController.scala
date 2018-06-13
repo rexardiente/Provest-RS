@@ -43,7 +43,10 @@ class HomeController @Inject() (
   }
 
   def index = Action { implicit request =>
-    println("Testing")
     Ok(views.html.dashboard())
+  }
+
+  def sign = Action { implicit request =>
+    Ok(views.html.auth())
   }
 }
