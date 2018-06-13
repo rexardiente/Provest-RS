@@ -7,6 +7,8 @@ GET   /                                   controllers.HomeController.index
 GET   /dashboard                          controllers.HomeController.index
 GET   /contact                            controllers.HomeController.index
 GET   /features                           controllers.HomeController.index
+GET   /auth/sign-in                       controllers.HomeController.sign
+GET   /auth/sign-up                       controllers.HomeController.sign
 
 # WebSocket Request
 GET   /ws                                 controllers.HomeController.ws

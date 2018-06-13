@@ -2,7 +2,6 @@
 
 
 /* Dashboard */
-
 /* Links */
 a,
 a:focus,
@@ -27,11 +26,12 @@ a:hover {
 
 html,
 body {
-  height: 100%;
   background-color: #333;
+  font-family: BlinkMacSystemFont;
 }
 
-body {
+.main-dashboard {
+  height: 100%;
   display: -ms-flexbox;
   display: flex;
   color: #fff;
@@ -53,6 +53,7 @@ body {
 
 .masthead-brand {
   margin-bottom: 0;
+  font-weight: bold;
 }
 
 .nav-masthead .nav-link {
@@ -105,8 +106,3 @@ body {
 .mastfoot {
   color: rgba(255, 255, 255, .5);
 }
-
-
-/*
- * =============================
- */

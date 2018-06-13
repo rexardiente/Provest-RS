@@ -2,8 +2,14 @@
 @helper.base {
   <link href="@routes.Assets.at("styles/auth.css")" rel="stylesheet">
 } {
-  <div class="container" id="content"></div>
+  <form class="form-signin">
+    <div id="content"></div>
+  </form>
 } {
+  <script>
+
+  </script>
+  <script src="@routes.Assets.at("comps/auth/register.js")"></script>
   <script src="@routes.Assets.at("comps/auth/sign-in.js")"></script>
   <script src="@routes.Assets.at("comps/auth/sign-up.js")"></script>
 }

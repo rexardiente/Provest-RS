@@ -9,4 +9,12 @@
       </main>
     </div>
   </div>
+  <script>
+  var self = this
+    helper = window.Helpers.factory()
+
+    this.on('mount', function() {
+      helper.setTitle({ title: 'Contact Us' })
+    })
+  </script>
 </contact>
