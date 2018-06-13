@@ -49,4 +49,8 @@ class HomeController @Inject() (
   def sign = Action { implicit request =>
     Ok(views.html.auth())
   }
+
+  def login = Action.async { implicit request =>
+    Future.successful(Ok(""))
+  }
 }
