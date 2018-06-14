@@ -27,6 +27,7 @@ final class AccountDAO @Inject()(
 
   object Query extends TableQuery(new AccountTable(_)) {
     @inline def apply(idAccountRef: UUID) = this.withFilter(_.idAccountRef === idAccountRef)
+    @inline def apply(accountName: String) = this.withFilter(_.accountName === accountName)
   }
 }
 

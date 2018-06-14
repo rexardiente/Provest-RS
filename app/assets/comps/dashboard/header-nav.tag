@@ -1,6 +1,8 @@
 <header>
   <div class="inner">
-    <h3 class="masthead-brand">MY WEBSITE</h3>
+    <h3 class="masthead-brand">
+      <img src="https://www.modexl.net/media/logo/image/demo/loremipsum-logo.png" class="img-fluid" alt="Responsive image" width="200">
+    </h3>
     <nav class="nav nav-masthead justify-content-center">
       <a class="nav-link { active: opts.sub === 'dashboard' }" href="/dashboard">Home</a>
       <a class="nav-link { active: opts.sub === 'features' }" href="/features">Features</a>

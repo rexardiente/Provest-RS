@@ -18,6 +18,7 @@ import play.api.libs.streams._
 import play.api.i18n.{ I18nSupport, MessagesApi }
 import actors._
 import models.domain._
+import models.service._
 
 import ejisan.play.libs.{ PageMetaSupport, PageMetaApi }
 
@@ -27,6 +28,7 @@ import ejisan.play.libs.{ PageMetaSupport, PageMetaApi }
  */
 @Singleton
 class HomeController @Inject() (
+  accountService: AccountService,
   implicit val system: ActorSystem,
   implicit val materializer: Materializer,
   val messagesApi: MessagesApi,
@@ -75,18 +77,21 @@ class HomeController @Inject() (
         // Future.successful(BadRequest(formWithErrors.errorsAsJson))},
         Future.successful(Redirect(routes.HomeController.auth()))},
       account => {
-        println(account)
-        Future.successful(Redirect(routes.HomeController.auth()))
+        accountService
+          .createAccount(account)
+          .map(_ => Redirect(routes.HomeController.auth()))
       })
   }
 
   def loginUser = Action.async { implicit request =>
     loginForm.bindFromRequest.fold(
-      formWithErrors => {
-        Future.successful(Redirect(routes.HomeController.auth()))},
+      formWithErrors => Future.successful(Redirect(routes.HomeController.auth())),
       user => {
-
-        Future.successful(Redirect(routes.HomeController.main()))
+        accountService.checkAccount(user._1, user._2)
+          .map {
+            if(_) Redirect(routes.HomeController.main())
+            else Redirect(routes.HomeController.auth())
+          }
       })
   }
 }

@@ -16,20 +16,27 @@ class AccountRepo @Inject()(
   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
   import driver.api._
 
-  def exists(idAccountRef: UUID): Future[Boolean] = db.run(dao.Query(idAccountRef).exists.result)
+  def exists(accountName: String): Future[Boolean] =
+    db.run(dao.Query(accountName).exists.result)
 
-  def get: Future[Seq[Account]] = db.run(dao.Query.result)
+  def checkAccount[T >: String](accountName: T, password: T): Future[Boolean] =
+    db.run(dao.Query.map(r => r.accountName == accountName && r.password == password).exists.result)
 
-  def getByIds(idAccountRef: Seq[UUID]): Future[Seq[Account]] =
-    db.run(dao.Query.filter(_.idAccountRef inSetBind idAccountRef).result)
+  def get: Future[Seq[Account]] =
+    db.run(dao.Query.result)
+
+  def getByIds(accountName: Seq[String]): Future[Seq[Account]] =
+    db.run(dao.Query.filter(_.accountName inSetBind accountName).result)
 
   def find(idAccountRef: UUID): OptionT[Future, Account] =
     OptionT(db.run(dao.Query(idAccountRef).result.headOption))
 
-  def add(account: Account): Future[Int] = db.run(dao.Query += account)
+  def add[T <: Account](acc: T): Future[Int] =
+    db.run(dao.Query += acc)
 
-  def delete(idAccountRef: UUID): Future[Int] = db.run(dao.Query(idAccountRef).delete)
+  def delete(accountName: String): Future[Int] =
+    db.run(dao.Query(accountName).delete)
 
-  def update(account: Account): Future[Int] =
-    db.run(dao.Query(account.idAccountRef).update(account))
+  def update[T <: Account](acc: T): Future[Int] =
+    db.run(dao.Query(acc.idAccountRef).update(acc))
 }
