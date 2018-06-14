@@ -20,7 +20,9 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
     <p class="mt-5 mb-3 text-muted text-center">
-      <a class="nav-link" id="register-link" href="/auth/sign-up">Not yet registered?</a>
+      <span class="nav-link" > Not yet Registered?
+        <a id="register-link" href="/auth/sign-up">Sign up</a>
+      </span>
       &copy; 2017-2018
     </p>
   </form>
