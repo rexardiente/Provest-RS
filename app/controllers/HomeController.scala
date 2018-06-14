@@ -1,6 +1,8 @@
 package controllers
 
 import javax.inject._
+import java.time.Instant
+import java.util.UUID
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -15,6 +17,7 @@ import play.api.libs.json._
 import play.api.libs.streams._
 import play.api.i18n.{ I18nSupport, MessagesApi }
 import actors._
+import models.domain._
 
 import ejisan.play.libs.{ PageMetaSupport, PageMetaApi }
 
@@ -38,19 +41,52 @@ class HomeController @Inject() (
    * a path of `/`.
    */
 
+  private def accountForm = Form(mapping(
+      "id_account_ref" -> ignored(UUID.randomUUID),
+      "account_name" -> nonEmptyText,
+      "password" -> nonEmptyText,
+      "email" -> nonEmptyText,
+      "created_at" -> ignored(Instant.now))
+  (Account.apply)(Account.unapply))
+
+  private def loginForm = Form(tuple(
+      "account_name" -> nonEmptyText,
+      "password" -> nonEmptyText))
+
   def ws = WebSocket.accept[JsValue, JsValue] { implicit request =>
     ActorFlow.actorRef(out => ClientManagerActor.props(out))
   }
 
-  def index = Action { implicit request =>
-    Ok(views.html.dashboard())
+  def index = Action.async { implicit request =>
+    Future.successful(Ok(views.html.dashboard()))
   }
 
-  def sign = Action { implicit request =>
-    Ok(views.html.auth())
+  def auth = Action.async { implicit request =>
+    Future.successful(Ok(views.html.auth()))
   }
 
-  def login = Action.async { implicit request =>
-    Future.successful(Ok(""))
+  def main = Action.async { implicit request =>
+    Future.successful(Ok(views.html.main()))
+  }
+
+  def createUser = Action.async { implicit request =>
+    accountForm.bindFromRequest.fold(
+      formWithErrors => {
+        // Future.successful(BadRequest(formWithErrors.errorsAsJson))},
+        Future.successful(Redirect(routes.HomeController.auth()))},
+      account => {
+        println(account)
+        Future.successful(Redirect(routes.HomeController.auth()))
+      })
+  }
+
+  def loginUser = Action.async { implicit request =>
+    loginForm.bindFromRequest.fold(
+      formWithErrors => {
+        Future.successful(Redirect(routes.HomeController.auth()))},
+      user => {
+
+        Future.successful(Redirect(routes.HomeController.main()))
+      })
   }
 }

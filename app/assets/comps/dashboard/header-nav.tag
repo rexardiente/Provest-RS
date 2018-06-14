@@ -5,11 +5,13 @@
       <a class="nav-link { active: opts.sub === 'dashboard' }" href="/dashboard">Home</a>
       <a class="nav-link { active: opts.sub === 'features' }" href="/features">Features</a>
       <a class="nav-link { active: opts.sub === 'contact' }" href="/contact">Contact us</a>
-      <a class="nav-link"
-        href="/auth/sign-in"
-        target="_blank">
-        Sign in
-      </a>
+      <a class="nav-link" href="#" onclick={ signIn }> Sign in </a>
     </nav>
   </div>
+
+  <script>
+    signIn(ev) {
+      location.href="/auth";
+    }
+  </script>
 </header>
