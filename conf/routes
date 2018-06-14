@@ -7,13 +7,20 @@ GET   /                                   controllers.HomeController.index
 GET   /dashboard                          controllers.HomeController.index
 GET   /contact                            controllers.HomeController.index
 GET   /features                           controllers.HomeController.index
+GET   /main                               controllers.HomeController.main
 
 # WebSocket Request
 GET   /ws                                 controllers.HomeController.ws
 
 # Login
-GET   /auth/sign-in                       controllers.HomeController.sign
-GET   /auth/sign-up                       controllers.HomeController.sign
+GET   /auth                               controllers.HomeController.auth
+GET   /auth/sign-up                       controllers.HomeController.auth
+GET   /auth/sign-in                       controllers.HomeController.auth
+POST  /auth/user/create                   controllers.HomeController.createUser
+POST  /auth/user/login                    controllers.HomeController.loginUser
+
+#main page
+
 #POST    /api/mridResetOf/:id              controllers.HomeController.resetAccountMrid(id: UUID)
 #PATCH   /groups/:id                       controllers.HomeController.update(id: UUID)
 

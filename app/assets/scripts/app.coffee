@@ -15,11 +15,14 @@ riot.route '/*', (sub) ->
       riot.mount '#content', 'contact'
     when 'features'
       riot.mount '#content', 'features'
+    when 'auth'
+      riot.mount '#content', 'sign-in'
+    when 'main'
+      riot.mount '#content', 'main-page'
 
 riot.route '/auth/*', (sub) ->
   switch sub
-    when 'sign-in'
-      riot.mount '#content', 'sign-in'
-      # riot.mount '#register', 'register'
     when 'sign-up'
       riot.mount '#content', 'sign-up'
+    when 'sign-in'
+      riot.mount '#content', 'sign-in'

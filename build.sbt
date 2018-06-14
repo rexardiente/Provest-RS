@@ -53,6 +53,8 @@ sassOptions in Assets ++= Seq("--cache-location", "target/web/sass/.sass-cache")
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
 
+routesImport ++= Seq("java.util.UUID", "utils.extension.PathBinders._")
+
 // Scala compiler options
 scalacOptions ++= Seq(
   "-deprecation",

@@ -1,0 +1,8 @@
+@()(implicit header: RequestHeader, messages: Messages, pm: PageMeta, wja: WebJarAssets)
+@helper.base {
+  <link href="@routes.Assets.at("styles/main.css")" rel="stylesheet">
+} {
+  <div id="content"></div>
+} {
+  <script src="@routes.Assets.at("comps/main/main-page.js")"></script>
+}
