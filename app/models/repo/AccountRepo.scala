@@ -19,17 +19,19 @@ class AccountRepo @Inject()(
   def exists(accountName: String): Future[Boolean] =
     db.run(dao.Query(accountName).exists.result)
 
-  def checkAccount[T >: String](accountName: T, password: T): Future[Boolean] =
-    db.run(dao.Query.map(r => r.accountName == accountName && r.password == password).exists.result)
+  def checkAccount(accountName: String, password: String): Future[Boolean] =
+    db.run(
+      dao.Query.filter(r => r.accountName === accountName && r.password === password
+    ).exists.result)
 
   def get: Future[Seq[Account]] =
     db.run(dao.Query.result)
 
-  def getByIds(accountName: Seq[String]): Future[Seq[Account]] =
+  def getByAccNames(accountName: Seq[String]): Future[Seq[Account]] =
     db.run(dao.Query.filter(_.accountName inSetBind accountName).result)
 
-  def find(idAccountRef: UUID): OptionT[Future, Account] =
-    OptionT(db.run(dao.Query(idAccountRef).result.headOption))
+  def find(accountName: String): OptionT[Future, Account] =
+    OptionT(db.run(dao.Query(accountName).result.headOption))
 
   def add[T <: Account](acc: T): Future[Int] =
     db.run(dao.Query += acc)
@@ -38,5 +40,5 @@ class AccountRepo @Inject()(
     db.run(dao.Query(accountName).delete)
 
   def update[T <: Account](acc: T): Future[Int] =
-    db.run(dao.Query(acc.idAccountRef).update(acc))
+    db.run(dao.Query(acc.accountName).update(acc))
 }

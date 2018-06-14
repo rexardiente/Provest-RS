@@ -26,28 +26,6 @@ final class AccountDAO @Inject()(
   }
 
   object Query extends TableQuery(new AccountTable(_)) {
-    @inline def apply(idAccountRef: UUID) = this.withFilter(_.idAccountRef === idAccountRef)
     @inline def apply(accountName: String) = this.withFilter(_.accountName === accountName)
   }
 }
-
-// @Singleton
-// final private[models] class RealmDAO @Inject()(
-//     protected val dbConfigProvider: DatabaseConfigProvider)
-//   extends HasDatabaseConfigProvider[utils.db.PostgresDriver] {
-//   import driver.api._
-
-//   protected class RealmTbl(tag: Tag)
-//     extends Table[Realm](tag, "REALMS") {
-//     def key = column[String]("KEY", O.Length(255, true), O.PrimaryKey)
-//     def label = column[String]("LABEL", O.Length(255, true))
-
-//     def * = (key, label) <> (Realm.tupled, Realm.unapply)
-//   }
-
-//   private[models] object query extends TableQuery(new RealmTbl(_)) {
-//     @inline def apply(key: String) =
-//       this.withFilter(_.key === key)
-//   }
-// }
-
